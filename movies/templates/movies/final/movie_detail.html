@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'movies/final/header.html' %}
+       
+  </head>
+  <!------------------------Scroll to top button------------------------------------------------>
+  <script>
+    setTimeout(function () {
+      $(".section").fadeToggle();
+    }, 4000);
+  </script>
+
+  <body>
+    <div class="scroll-bar">
+      <!-- navbar starts -->
+      {% include 'movies/final/navbar.html' %}
+
+      <marquee>Welcome To <i>ApnaTheatre</i>.com<sup>&reg;</sup></marquee>
+      <label class="online">Stream Latest Movies Now!</label>
+
+      {% include 'movies/final/footer.html' %}
+    </div>
+
+</html>

@@ -1,0 +1,63 @@
+.poster{
+    box-shadow: 0 0 15px red !important;
+  
+}
+  .buddy{
+    cursor: pointer;
+  }
+  #scrollToTopButton {
+    position: fixed;
+    bottom: 40px;
+    right: 25px;
+    font-size: 25px;
+    z-index: 99;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    color: black;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 6px;
+    border-radius: 50%;
+  }
+
+#scrollToTopButton:hover,i:hover {
+    background-color: white;
+    color: red;
+  }
+
+  .navbar-nav{
+    display: flex;
+    align-items: center;
+    padding: 0px 7.5px;
+  }
+
+
+
+
+  .maincontainer h3 {
+    color: white;
+    text-align: center;
+}
+
+.container {
+  text-align: center;
+}
+#navbarNav.nav-item.nav-link a:hover{
+  color: red;
+}
+.nav-link:hover{
+  color: red;
+}
+.nav-item :hover{
+  margin-bottom: 10px;
+  /* background-color: aquamarine; */
+  border-bottom: 3px;
+  border-color: red;
+  border-bottom-style: solid;
+}
+
+#header-nav .nav-link a:hover{
+  color: red;
+}

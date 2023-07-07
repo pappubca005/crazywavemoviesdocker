@@ -1,0 +1,4 @@
+latex2mathml
+django
+tmdbv3api
+pillow

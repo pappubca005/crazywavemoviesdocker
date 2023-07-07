@@ -1,0 +1,549 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include 'movies/final/header.html' %}
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1,user-scalable=1"
+    />
+    <meta name="robots" content="NOINDEX, NOFOLLOW" />
+    <title>
+      High-Speed HD Server for Movie and TV Streaming in 1080P HD With No Buffer
+    </title>
+    <link
+      rel="shortcut icon"
+      href="https://watchmoviiess.top/123movies/templates/landing/4kmoviesclub-logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://watchmoviiess.top/123movies/templates/landing/watchordownload.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://watchmoviiess.top/123movies/templates/landing/main-style.css?ver=1.5.22"
+    />
+    <link
+      rel="stylesheet"
+      href="https://watchmoviiess.top/123movies/templates/landing/jquery-ui.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      .nodisplay {
+        display: none;
+      }
+      .custom-green a {
+        justify-content: center !important;
+      }
+      html .custom-green {
+        background: #88b630 !important;
+        border: 1px solid #41b51e !important;
+      }
+      html .custom-green:after {
+        background: #087a00 !important;
+      }
+    </style>
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+  </head>
+
+  <!------------------------Scroll to top button------------------------------------------------>
+  <script>
+    setTimeout(function () {
+      $(".section").fadeToggle();
+    }, 4000);
+  </script>
+
+  <body>
+    <div class="scroll-bar">
+      {% include 'movies/final/navbar.html' %}
+
+      <div class="row no-mod">
+        <div class="large-12 medium-10 small-no-mod columns medium-centered">
+          <div class="video-container">
+            <div class="video-player">
+              <div class="video">
+                <div
+                  class="overlay-video"
+                  style="
+                    background-image: url('https://image.tmdb.org/t/p/w780/7eOEjONCwAmFm4ILod0b2pVym7z.jpg');
+                    display: none;
+                  "
+                >
+                  <div class="play-button" style="display: none"></div>
+                </div>
+                <div class="percent-container" style="display: none">
+                  <p>
+                    <img
+                      class="loader"
+                      src="https://watchmoviiess.top/123movies/templates/landing/video-throbber.gif"
+                      alt="loading..."
+                    />
+                  </p>
+                  <p class="percent">Loading: 28343%</p>
+                </div>
+                <div class="img-bg opening-scene">
+                  <img
+                    class="video-img"
+                    src="https://watchmoviiess.top/123movies/templates/landing/openingscenewide_EN.jpg"
+                    alt=""
+                    style="display: none"
+                  />
+                </div>
+                <div class="form-container" style="display: block">
+                  <div class="row">
+                    <div
+                      class="small-12 medium-10 medium-centered columns text-center popup2-box"
+                    >
+                      <div
+                        class="small-12 columns text-center cone warning-icon icon"
+                      >
+                        <span>
+                          <svg
+                            width="55"
+                            height="55"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 47.55 42.24"
+                          >
+                            <title>caution svg</title>
+                            <path
+                              d="M48.65,40.15L28.87,5.87a4,4,0,0,0-6.9,0L2.18,40.15a4,4,0,0,0,3.45,6H45.2A4,4,0,0,0,48.65,40.15ZM25.34,39.4a2.4,2.4,0,1,1,2.4-2.4A2.4,2.4,0,0,1,25.34,39.4Zm1.8-8.69H23.54l-0.6-13.92h4.94Z"
+                              transform="translate(-1.64 -3.88)"
+                              style="fill: #f2e01c"
+                            ></path>
+                          </svg>
+                        </span>
+                      </div>
+                      <div class="small-12 columns text-container">
+                        <p class="popup-msg">
+                          <span class="video-popup-text"
+                            >You must be logged in to continue streaming</span
+                          >
+                        </p>
+                        <div class="btn-container">
+                          <div class="popup-btn-wrap signup-btn">
+                            <a
+                              class="popup-btn footer-login-signup-button"
+                              href="https://cjewz.com/pl?o=f600065528acc0fcaf766b916991a850:83f40927e9b651b8fa1856a92c1219b9"
+                              >SIGN UP FOR FREE</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="controls">
+                <div class="small-1 medium-1 large-1 no-col-hd-pad columns">
+                  <i class="icon-play" style="display: none"></i>
+                  <a href="">
+                    <i class="icon-pause" style="display: inline"></i>
+                  </a>
+                </div>
+                <div class="small-9 medium-8 large-5 columns">
+                  <div class="time">
+                    <div class="time-full buffer-play" style="width: 1%"></div>
+                    <div class="time-buffer buffer" style="width: 50%"></div>
+                  </div>
+                </div>
+                <div
+                  class="small-0 medium- 0 large-1 columns show-for-large-up"
+                >
+                  <span class="timer length">81:25</span>
+                </div>
+                <div class="small-1 medium-1 columns hide-for-large-up">
+                  <i class="icon-vol"></i>
+                </div>
+                <div
+                  class="small-0 medium-0 large-3 columns no-col-left-pad show-for-large-up"
+                >
+                  <div class="small-0 medium-0 large-3 columns">
+                    <i class="icon-vol"></i>
+                  </div>
+                  <div class="small-0 medium-0 medium-9 columns">
+                    <div
+                      class="slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                    >
+                      <div
+                        class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"
+                        style="width: 30%"
+                      ></div>
+                      <span
+                        class="ui-slider-handle ui-state-default ui-corner-all"
+                        tabindex="0"
+                        style="left: 30%"
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="small-0 medium-1 large-1 columns no-col-hd-pad show-for-medium-up"
+                >
+                  <a href=""> <i class="icon-hd"></i> </a>
+                </div>
+                <div
+                  class="small-0 medium-1 large-1 columns no-col-left-pad show-for-medium-up"
+                >
+                  <a href=""> <i class="icon-fullscreen"></i> </a>
+                </div>
+              </div>
+              <div class="movie-data">
+                <div class="available-formats-wrapper">
+                  <div class="available-formats">Available Formats</div>
+                  <div class="available-formats-img">
+                    <img
+                      src="https://watchmoviiess.top/123movies/templates/landing/available-formats-img.png"
+                      alt="available formats"
+                    />
+                  </div>
+                  <div class="available-formats-img-mobile">
+                    <img
+                      src="https://watchmoviiess.top/123movies/templates/landing/available-formats-img-mobile.png"
+                      alt="available formats for mobile"
+                    />
+                  </div>
+                  <div class="dl-btn-box">
+                    <div class="orange-btns-wrap">
+                      <div
+                        class="download-btn-wrap orange-btn download-btn custom-green"
+                      >
+                        <a
+                          href="https://cjewz.com/pl?o=f600065528acc0fcaf766b916991a850:83f40927e9b651b8fa1856a92c1219b9"
+                          >Download
+                        </a>
+                      </div>
+                    </div>
+                    <div class="secure-wrapper">
+                      <div class="secure">Secure Verified</div>
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/secure-icon.png"
+                        alt="secure verified website"
+                      />
+                    </div>
+                  </div>
+                  <div class="small-12 medium-12 large-12 no-col-pad columns">
+                    <div class="movie-picture show-for-medium-up">
+                      <img
+                        id="poster"
+                        class="shadow"
+                        src="https://image.tmdb.org/t/p/w185/vmRXYQUtCkqo6N8mc46WImvQ1Wz.jpg"
+                        alt="movie poster"
+                      />
+                      <p style="font-size: 0.8em; line-height: 1.3em"></p>
+                    </div>
+                    <div class="movie-info">
+                      <b id="Title">Tarzan's Secret Treasure</b>
+                      <p id="plot">
+                        Tarzan's jungle home, and his family, Jane and Boy, are
+                        threatened by men greedy for gold.
+                      </p>
+                      <p>
+                        <b>Release Date: </b>
+                        <span id="release">1941-12-01</span>
+                      </p>
+                      <p>
+                        <b>Genres: </b> <span id="genre">Action</span> ,<span
+                          id="genre"
+                          >Adventure</span
+                        >
+                      </p>
+                      <p>
+                        <b>Director: </b>
+                        <span id="Director">Richard Thorpe</span>
+                      </p>
+                      <p>
+                        <b>Actors:</b>
+                        <span id="actors">Johnny WeissmÃ¼ller</span> ,<span
+                          id="actors"
+                          >Maureen O'Sullivan</span
+                        >
+                        ,<span id="actors">Johnny Sheffield</span> ,<span
+                          id="actors"
+                          >Reginald Owen</span
+                        >
+                        ,<span id="actors">Barry Fitzgerald</span> ,<span
+                          id="actors"
+                          >Tom Conway</span
+                        >
+                        ,<span id="actors">Philip Dorn</span> ,<span id="actors"
+                          >Cordell Hickman</span
+                        >
+                      </p>
+                      <p><b>Duration: </b> <span id="Duration">81 min</span></p>
+                      <p>
+                        <b>IMDB rating:</b> <span id="imdbRating">6.4</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="clear"></div>
+                <div class="commentcontain">
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">MKIFRA125</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">2 hours ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      I highly recommend it - one of my absolute favorites :).
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">zMasRaj</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">14 hours ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      great quality, thank you so much!
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">RosaixCool</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">1 day ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      Spoken language of this video is English, but there's like
+                      20 different subtitles to choose from when you are logged
+                      in!
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">MovieFan555</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">2 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      Finally... A real place to watch the full version...
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">PaulSR</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">3 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      It's annoying you have to sign up to stream it...
+                    </div>
+                    <div class="comment-box-reply">
+                      <div class="comment-user-icon">
+                        <img
+                          src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                          alt="user"
+                        />
+                      </div>
+                      <div class="comment-username">Jennifer T. Ebert</div>
+                      <div class="clear"></div>
+                      <div class="comment-time-icon">
+                        <img
+                          src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                          alt="timestamp"
+                        />
+                      </div>
+                      <div class="comment-days">3 days ago</div>
+                      <div class="clear"></div>
+                      <div class="comment-msg">
+                        Yes, but this site doesn't buffer like others.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">Lindaxxx</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">4 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">Can I play it on my smart TV?</div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">theoneviking425</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">5 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      No spoilers... But the ending is so intense, haha.
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">Anonymous</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">5 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">
+                      I was taken to another site where I had to register an
+                      account, it takes like 5 minutes but now I have access to
+                      everything easy.
+                    </div>
+                    <div class="comment-box-reply">
+                      <div class="comment-user-icon">
+                        <img
+                          src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                          alt="user"
+                        />
+                      </div>
+                      <div class="comment-username">ThomasandhisPC</div>
+                      <div class="clear"></div>
+                      <div class="comment-time-icon">
+                        <img
+                          src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                          alt="timestamp"
+                        />
+                      </div>
+                      <div class="comment-days">5 days ago</div>
+                      <div class="clear"></div>
+                      <div class="comment-msg">
+                        Yeah, it's confusing but it's free so why complain xD.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="comment-box">
+                    <div class="comment-user-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/user-icon.png"
+                        alt="user"
+                      />
+                    </div>
+                    <div class="comment-username">SandyCombs</div>
+                    <div class="clear"></div>
+                    <div class="comment-time-icon">
+                      <img
+                        src="https://watchmoviiess.top/123movies/templates/landing/clock-icon.png"
+                        alt="timestamp"
+                      />
+                    </div>
+                    <div class="comment-days">6 days ago</div>
+                    <div class="clear"></div>
+                    <div class="comment-msg">Thanks! Great quality!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <div id="footer-login">
+                <div class="footer-btn footer-login">
+                  <a class="footer-login-signup-button" href="#">LOGIN</a>
+                </div>
+                <div class="footer-btn">
+                  <a
+                    class="footer-login-signup-button"
+                    href="https://cjewz.com/pl?o=f600065528acc0fcaf766b916991a850:83f40927e9b651b8fa1856a92c1219b9"
+                    >SIGN UP</a
+                  >
+                </div>
+              </div>
+            </div>
+            <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+            <script src="https://watchmoviiess.top/123movies/templates/landing/jquery-ui.min.js"></script>
+            <script src="https://watchmoviiess.top/123movies/templates/landing/hd.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'movies/final/footer.html' %}
+  </body>
+</html>

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+{% include 'movies/final/header.html' %}
+</head>
+<!------------------------Scroll to top button------------------------------------------------>
+<script>
+  setTimeout(function () {
+    $('.section').fadeToggle();
+  }, 4000);
+  
+</script>
+
+<body>
+  
+
+  <div class="scroll-bar">
+
+    
+    <!-- navbar starts -->
+    {% include 'movies/final/navbar.html' %}
+    
+
+    <marquee>Welcome To <i>ApnaTheatre</i>.com<sup>&reg;</sup></marquee>
+    <label class="online">Stream Latest Movies Now!</label>
+    
+
+    {% include 'movies/final/topcard.html' %}
+
+        
+    <div class="maincontainer">
+
+      <h2>Movies</h2>
+      <hr>
+      <div class="container">
+          <div id="movies" class="row"></div>
+      </div>
+           
+      {% include 'movies/final/hollywoodmovie.html' %}
+
+      {% include 'movies/final/bollywoodmovie.html' %}
+
+    <!---next block -->
+
+    <h2>Web Series</h2>
+    <hr>
+    
+    {% include 'movies/final/hollywoodwebseries.html' %}
+
+    <!---third block -->
+
+
+    {% include 'movies/final/bollywoodwebseries.html' %}
+
+
+  <!---third block -->
+
+      <h2>Kids</h2>
+      <hr>
+
+
+      {% include 'movies/final/kidsmovie.html' %}
+
+      <h2>Anime</h2>
+      <hr>
+      
+
+      {% include 'movies/final/animationmovie.html' %}
+
+
+    <div id="waterdrop"></div>
+
+    <!-------------------------------Footer-------------------------------->
+    {% include 'movies/final/footer.html' %}
+
+    </body>
+
+</html>

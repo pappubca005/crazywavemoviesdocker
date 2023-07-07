@@ -1,0 +1,58 @@
+
+{% load static %}
+
+<div class="container" id="WebSeries">
+  <h3>Hollywood</h3>
+  <hr>
+   
+  {% for item in apiresult %}
+
+  
+  <div class="poster">
+   <div class="flip-card_i">
+     <div class="flip-card-inner_i">
+       <div class="flip-card-front_i">
+           <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ item.poster_path }}" alt="Avatar" style="width:250px;height:360px;">
+       </div>
+       <div class="flip-card-back_i">
+         <h1>{{ item.title }}</h1>
+           <button class="btn_i b3_i"  title="Year" style="color:white">{{ item.release_date }}</button>
+           <button class="btn_i b2_i"  title="Minutes" style="color:white">2h41m<button>
+           <button class="btn_i b1_i"  title="IMDb" style="color:white">{{ item.vote_average }}</button>
+         </span>
+         <br />
+         <br />
+       </p>
+
+         <p class="para_i">{{ item.overview }}</p>
+
+             <button class="trailer_i" type="submit" value="" onclick="openWin12()">▶Trailer</button>
+             <script type="text/javascript">
+               function openWin12(){
+                 window.open("https://youtu.be/fd_w7Qw8biU","_blank","top=100,left=250,height=400,width=600,channelmode=yes,fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,noopener=no");
+               }
+             </script><br><br>
+           <button class="btn_i b4_i" onclick="openMovieWin12()">▶Play</button>
+           
+           <script type="text/javascript">
+             function openMovieWin12(){
+               window.open("https://youtu.be/uBI1iMhl25w","_blank","top=100,left=250,height=400,width=600,channelmode=yes,fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,noopener=no");
+             }
+           </script>
+       </div>
+     </div>
+     <div class="flim">
+       <b>{{ item.title }}</b>
+       <br>
+       IMDb - {{ item.vote_average }}
+     </div>
+   </div>
+
+
+ </div>
+
+
+ {% endfor %}
+
+
+</div>
