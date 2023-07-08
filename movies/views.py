@@ -5,100 +5,48 @@ from tmdbv3api import TMDb, Movie, TV, Trending
 import requests
 import json
 
+headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
+}
+nowplaying_url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
+popular_url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+toprated_url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
+upcoming_url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
+
 
 # Create your views here.
 def MainHome(request):
-    tmdb = TMDb()
-    tmdb.api_key = "982811b8e8117b13fabfcf15a2ebfce3"
-    movie = Movie()
+    response = requests.get(nowplaying_url, headers=headers)
+    nowplayingmovies = response.json()["results"][0:23]
 
-    """m = movie.details(36668)
-    print(m.title)
-    print(m.overview)
-    print(m.popularity)"""
+    response = requests.get(popular_url, headers=headers)
+    popularmovies = response.json()["results"][0:19]
 
-    mobjten = MovieModel.objects.all()[:20]
-    tmvobjten = []
-    for i in mobjten:
-        m = movie.details(i.tmvdbid)
-        tmvobjten.append(m)
+    response = requests.get(toprated_url, headers=headers)
+    topmovies = response.json()["results"][0:19]
 
-    popular = movie.popular()
-    pplrobj = []
-    for p in popular:
-        pplrobj.append(p)
+    response = requests.get(upcoming_url, headers=headers)
+    upcomingmovies = response.json()["results"][0:19]
 
-    mobjfft = MovieModel.objects.all()[20:50]
-    tmvobjfft = []
-    for i in mobjfft:
-        m = movie.details(i.tmvdbid)
-        tmvobjfft.append(m)
-
-    toprated = movie.top_rated()
-    tprobj = []
-    for p in toprated:
-        tprobj.append(p)
-
-    user = request.user
     context = {
-        "tmvobjten": tmvobjten,
-        "pplrobj": pplrobj,
-        "mobjfft": tmvobjfft,
-        "tprobj": tprobj,
+        "nowplayingmovies": nowplayingmovies,
+        "popularmovies": popularmovies,
+        "topmovies": topmovies,
+        "upcomingmovies": upcomingmovies,
     }
-
-    url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
-
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
-    }
-
-    response = requests.get(url, headers=headers)
-
-    print(response.text)
-    context = {"apiresult": response.json()["results"][0:12], "data": "this is test"}
-
-    print(context)
-    return render(request, "movies/final/base.html", context)
-
-
-# def detail_view(request):
-#     url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
-
-#     headers = {
-#         "accept": "application/json",
-#         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
-#     }
-
-#     response = requests.get(url, headers=headers)
-
-#     print(response.text)
-#     context = {"apiresult": response.json()["results"][0:12], "data": "this is test"}
-
-#     print(context)
-#     # return render(request, "movies/final/movie_description.html", context)
-#     return render(request, "movies/final/movie_detail2.html", context)
+    return render(request, "movies/final/index.html", context)
 
 
 def movie_detail(request, movie_id):
     url = "https://api.themoviedb.org/3/movie/" + movie_id + "?language=en-US"
 
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
-    }
     response = requests.get(url, headers=headers)
 
     print(response.text)
     movie_detail = response.json()
 
     url = "https://api.themoviedb.org/3/movie/" + movie_id + "/images"
-
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
-    }
 
     response = requests.get(url, headers=headers)
     imagedetail = response.json()
@@ -108,6 +56,6 @@ def movie_detail(request, movie_id):
         "imagedetail": imagedetail["backdrops"][0:15],
     }
 
-    print(context)
+    # print(context)
     # return render(request, "movies/final/movie_description.html", context)
-    return render(request, "movies/final/movie_detail2.html", context)
+    return render(request, "movies/final/movie_detail.html", context)
