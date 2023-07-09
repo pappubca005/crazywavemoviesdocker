@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="header-nav">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home.html"
+    <a class="navbar-brand" href="{% url 'MainHome' %}"
       ><img
         class="logo"
         src="{% static 'images/TheaterLogoFinal.png' %}"
@@ -42,7 +42,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="movies.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Movies</a
@@ -51,7 +51,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="web-series.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Web Series</a
@@ -60,7 +60,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="kids.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Kids</a
@@ -69,7 +69,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="tv.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >TV</a
@@ -78,7 +78,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="premium.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Premium</a
@@ -88,7 +88,7 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            href="contactus.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Contact Us</a
@@ -115,18 +115,18 @@
                 Genres
               </button>
               <div class="dropdown-content" style="color: white">
-                <a href="popular.html">Popular</a>
-                <a href="crime.html">Crime</a>
-                <a href="suspense.html">Suspense Thriller</a>
-                <a href="action.html">Action</a>
-                <a href="fantasy.html">Sci-Fi Fantasy</a>
-                <a href="documentary.html">Documentary</a>
-                <a href="horror.html">Horror</a>
-                <a href="drama.html">Drama</a>
-                <a href="war.html">War Politics</a>
-                <a href="comedy.html">Comedy</a>
-                <a href="romance.html">Romance</a>
-                <a href="anime.html">Anime</a>
+                <a href="{% url 'MainHome' %}">Popular</a>
+                <a href="{% url 'MainHome' %}">Crime</a>
+                <a href="{% url 'MainHome' %}">Suspense Thriller</a>
+                <a href="{% url 'MainHome' %}">Action</a>
+                <a href="{% url 'MainHome' %}">Sci-Fi Fantasy</a>
+                <a href="{% url 'MainHome' %}">Documentary</a>
+                <a href="{% url 'MainHome' %}">Horror</a>
+                <a href="{% url 'MainHome' %}">Drama</a>
+                <a href="{% url 'MainHome' %}">War Politics</a>
+                <a href="{% url 'MainHome' %}">Comedy</a>
+                <a href="{% url 'MainHome' %}">Romance</a>
+                <a href="{% url 'MainHome' %}">Anime</a>
               </div>
             </div>
           </div>
