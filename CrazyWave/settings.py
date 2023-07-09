@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-0ynmdz3r5%z7yjn(_-04r-fvc4kp#vl*vd=$lpao!-m%ylzz_*
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+SITE_ID = 1
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "movies",
     # "runsslserver",
 ]
