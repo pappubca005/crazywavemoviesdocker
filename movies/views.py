@@ -1,32 +1,39 @@
-from django.shortcuts import render
-from .models import Movies as MovieModel
+from django.shortcuts import render, get_object_or_404
+from .models import Movies as MovieModel, PopularMovies
 from .models import SeriesModel
 from tmdbv3api import TMDb, Movie, TV, Trending
+from .serializers import MoviesSerializer, PopularMoviesSerializer
 import requests
+import datetime
 import json
+
+movie = Movie()
+
+tmdb = TMDb()
+tmdb.api_key = "982811b8e8117b13fabfcf15a2ebfce3"
 
 headers = {
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODI4MTFiOGU4MTE3YjEzZmFiZmNmMTVhMmViZmNlMyIsInN1YiI6IjY0OTI5NzcyYzI4MjNhMDBmZmEwNzJjNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KlUxLqciegDaMNjCfQIuQDBPFQui5rHrtGdL9eyjQEo",
 }
-nowplaying_url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
-popular_url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
-toprated_url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
-upcoming_url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
+nowplaying_url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US"
+popular_url = "https://api.themoviedb.org/3/movie/popular?language=en-US"
+toprated_url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US"
+upcoming_url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US"
 
 
 # Create your views here.
 def MainHome(request):
-    response = requests.get(nowplaying_url, headers=headers)
+    response = requests.get(nowplaying_url + "&page=1", headers=headers)
     nowplayingmovies = response.json()["results"][0:23]
 
-    response = requests.get(popular_url, headers=headers)
+    response = requests.get(popular_url + "&page=1", headers=headers)
     popularmovies = response.json()["results"][0:19]
 
-    response = requests.get(toprated_url, headers=headers)
+    response = requests.get(toprated_url + "&page=1", headers=headers)
     topmovies = response.json()["results"][0:19]
 
-    response = requests.get(upcoming_url, headers=headers)
+    response = requests.get(upcoming_url + "&page=1", headers=headers)
     upcomingmovies = response.json()["results"][0:19]
 
     context = {
@@ -38,7 +45,9 @@ def MainHome(request):
     return render(request, "movies/final/index.html", context)
 
 
-def movie_detail(request, movie_id):
+def movie_detail(request, movie_id, movie_name):
+    print(movie_name)
+    id = get_object_or_404(PopularMovies, id=movie_id)
     url = "https://api.themoviedb.org/3/movie/" + movie_id + "?language=en-US"
 
     response = requests.get(url, headers=headers)
@@ -56,6 +65,102 @@ def movie_detail(request, movie_id):
         "imagedetail": imagedetail["backdrops"][0:15],
     }
 
-    # print(context)
-    # return render(request, "movies/final/movie_description.html", context)
     return render(request, "movies/final/movie_detail.html", context)
+
+
+def movie_update(request):
+    movies = Movie()
+
+    popular = movies.popular()
+    nowplaying = movies.now_playing()
+    toprated = movies.top_rated()
+    upcoming = movies.upcoming()
+
+    pg = 1
+    page_count = []
+    response = requests.get(nowplaying_url + "&page=" + str(pg), headers=headers)
+    nowplaying = response.json()["results"]
+    page_count.append(response.json()["total_pages"])
+
+    response = requests.get(popular_url + "&page=" + str(pg), headers=headers)
+    popular = response.json()["results"]
+    page_count.append(response.json()["total_pages"])
+
+    response = requests.get(toprated_url + "&page=" + str(pg), headers=headers)
+    toprated = response.json()["results"][0:19]
+    page_count.append(response.json()["total_pages"])
+
+    response = requests.get(upcoming_url + "&page=" + str(pg), headers=headers)
+    upcoming = response.json()["results"]
+    page_count.append(response.json()["total_pages"])
+
+    # category = [popular, nowplaying, toprated, upcoming]
+    category = {
+        "popular": ["upcoming_url", page_count[0]],
+        "nowplaying": ["upcoming_url", page_count[1]],
+        "toprated": ["upcoming_url", page_count[2]],
+        "upcoming": ["upcoming_url", page_count[3]],
+    }
+
+    i = 0
+    category_name = ["popular", "nowplaying", "toprated", "upcoming"]
+
+    for cat in category:
+        x = 0
+        for x in range(499):
+            result = requests.get(toprated_url + "&page=" + str(x + 1), headers=headers)
+            if result.status_code != 200:
+                continue
+            moview_result = result.json()["results"]
+            for item in moview_result:
+                id_exit = PopularMovies.objects.all().filter(id=item["id"]).count()
+                if id_exit == 0:
+                    mv = PopularMovies.objects.create(
+                        id=item["id"],
+                        adult=item["adult"],
+                        backdrop_path=item["backdrop_path"],
+                        genre_ids=item["genre_ids"],
+                        original_language=item["original_language"],
+                        original_title=item["original_title"],
+                        overview=item["overview"],
+                        popularity=item["popularity"],
+                        poster_path=item["poster_path"],
+                        release_date=datetime.datetime.now(),
+                        title=item["title"],
+                        video=item["video"],
+                        vote_average=item["vote_average"],
+                        vote_count=item["vote_count"],
+                        movie_category=category_name[i],
+                    )  # create a User object
+                    mv.save()  # save it
+
+                else:
+                    PopularMovies.objects.filter(
+                        id=item["id"],
+                    ).update(
+                        adult=item["adult"],
+                        backdrop_path=item["backdrop_path"],
+                        genre_ids=item["genre_ids"],
+                        original_language=item["original_language"],
+                        original_title=item["original_title"],
+                        overview=item["overview"],
+                        popularity=item["popularity"],
+                        poster_path=item["poster_path"],
+                        release_date=datetime.datetime.now(),
+                        title=item["title"],
+                        video=item["video"],
+                        vote_average=item["vote_average"],
+                        vote_count=item["vote_count"],
+                        movie_category=category_name[i],
+                    )
+
+        i += 1
+
+    return render(
+        request,
+        "movies/final/movie_detail.html",
+    )
+
+
+def about(request):
+    return "this is about page"

@@ -1,9 +1,38 @@
 from django.db import models
+from django.shortcuts import reverse
 
 # Create your models here.
 from django.db import models
+from jsonfield import JSONField
 
 # from docutils.utils.math.latex2mathml import mo
+
+
+class PopularMovies(models.Model):
+    id = models.IntegerField(primary_key=True)
+    adult = models.BooleanField(default=False, null=True)
+    backdrop_path = models.CharField(max_length=500, null=True, blank=True)
+    genre_ids = models.CharField(max_length=10000, null=True, blank=True)
+    original_language = models.CharField(max_length=10000, null=True, blank=True)
+    original_title = models.CharField(max_length=10000, null=True, blank=True)
+    overview = models.CharField(max_length=10000, null=True, blank=True)
+    popularity = models.DecimalField(max_digits=100, decimal_places=2)
+    poster_path = models.CharField(max_length=10000, null=True, blank=True)
+    release_date = models.DateField()
+    title = models.CharField(max_length=10000, null=True, blank=True)
+    video = models.BooleanField(default=False, null=True)
+    vote_average = models.DecimalField(max_digits=100, decimal_places=2)
+    vote_count = models.IntegerField(null=True)
+    movie_category = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse("model_detail", args={self.id})
+
+    def get_absolute_url(self):
+        return f"/movie_detail/{self.id}/{self.title}"
 
 
 class Movies(models.Model):
