@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+{% include 'movies/final/header.html' %}
+</head>
+<!------------------------Scroll to top button------------------------------------------------>
+
+<script>
+  setTimeout(function () {
+    $('.section').fadeToggle();
+  }, 4000);
+  
+</script>
+
+<body>
+  
+
+  <div class="scroll-bar">
+
+    
+    <!-- navbar starts -->
+    {% include 'movies/final/navbar.html' %}
+    
+
+    <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
+    <label class="online">Download Latest Movies Now!</label>
+    
+
+        
+    <div class="maincontainer">
+
+      <h2>Movies</h2>
+      <hr>
+      <div class="container">
+          <div id="movies" class="row"></div>
+      </div>
+           
+      {% include 'movies/final/category_list.html' %}
+
+    <div id="waterdrop"></div>
+
+    <!-------------------------------Footer-------------------------------->
+    {% include 'movies/final/footer.html' %}
+
+    </body>
+
+</html>

@@ -13,11 +13,14 @@ urlpatterns = [
     path(
         "movie_detail/<movie_id>/<movie_name>/", views.movie_detail, name="movie_detail"
     ),
+    path(
+        "movie_category/<movie_category>/",
+        views.movie_category,
+        name="movie_category",
+    ),
     # path("movie_detail/<movie_id>", views.movie_detail, name="movie_detail_2"),
     path("movie_update", views.movie_update, name="movie_update"),
     path("about", views.about, name="about"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}),
-    # path("movie_details/<movie_id>", views.movie_details, name="movie_details"),
-    # path("add_movie/", views.add_movie, name="add_movie"),
     # path("search_details/", views.search_details, name="search_details"),
 ]

@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="container" id="Movies">
+  <h3>Top Movies</h3>
+  <hr>
+
+  {% for item in topmovies %}
+
+  
+   <div class="poster">
+    <div class="flip-card_i">
+      <div class="flip-card-inner_i">
+        <div class="flip-card-front_i">
+            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ item.poster_path }}" alt="Avatar" style="width:250px;height:360px;">
+        </div>
+        <div class="flip-card-back_i">
+          <a href="{% url 'movie_detail' item.id item.title %}">
+            <h1>{{ item.title }}</h1>
+            <button class="btn_i b3_i"  title="Year" style="color:white">{{ item.release_date }}</button>
+            <button class="btn_i b2_i"  title="Minutes" style="color:white">2h41m<button>
+            <button class="btn_i b1_i"  title="IMDb" style="color:white">{{ item.vote_average }}</button>
+          </a>
+          <br />
+          <br />
+
+          <p class="para_i">{{ item.overview }}</p>
+        </div>
+      </div>
+      <div class="flim">
+        <b>{{ item.title }}</b>
+        <br>
+        IMDb - {{ item.vote_average }}
+      </div>
+    </div>
+
+
+  </div>
+
+
+  {% endfor %}
+
+</div>
+
+

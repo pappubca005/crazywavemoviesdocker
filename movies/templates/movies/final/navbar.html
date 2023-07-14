@@ -33,7 +33,7 @@
           <a
             class="nav-link active s"
             aria-current="page"
-            href="home.html"
+            href="{% url 'MainHome' %}"
             onMouseOver="this.style.color='red'"
             onMouseOut="this.style.color='white'"
             >Home</a
@@ -115,18 +115,28 @@
                 Genres
               </button>
               <div class="dropdown-content" style="color: white">
-                <a href="{% url 'MainHome' %}">Popular</a>
-                <a href="{% url 'MainHome' %}">Crime</a>
-                <a href="{% url 'MainHome' %}">Suspense Thriller</a>
-                <a href="{% url 'MainHome' %}">Action</a>
-                <a href="{% url 'MainHome' %}">Sci-Fi Fantasy</a>
-                <a href="{% url 'MainHome' %}">Documentary</a>
-                <a href="{% url 'MainHome' %}">Horror</a>
-                <a href="{% url 'MainHome' %}">Drama</a>
-                <a href="{% url 'MainHome' %}">War Politics</a>
-                <a href="{% url 'MainHome' %}">Comedy</a>
-                <a href="{% url 'MainHome' %}">Romance</a>
-                <a href="{% url 'MainHome' %}">Anime</a>
+                <a href="{% url 'movie_category' 'Bollywood' %}">Bollywood</a>
+                <a href="{% url 'movie_category' 'crime' %}">Crime</a>
+                <a href="{% url 'movie_category' 'comedy' %}">Comedy</a>
+                <a href="{% url 'movie_category' 'romance' %}">Romance</a>
+                <a href="{% url 'movie_category' 'drama' %}">Drama</a>
+                <a href="{% url 'movie_category' 'action' %}">Action</a>
+                <a href="{% url 'movie_category' 'thriller' %}">Thriller</a>
+                <a href="{% url 'movie_category' 'documentary' %}"
+                  >Documentary</a
+                >
+                <a href="{% url 'movie_category' 'adventure' %}">Adventure</a>
+                <a href="{% url 'movie_category' 'Science Fiction' %}"
+                  >Science Fiction</a
+                >
+                <a href="{% url 'movie_category' 'mystery' %}">Mystery</a>
+                <a href="{% url 'movie_category' 'horror' %}">Horror</a>
+                <a href="{% url 'movie_category' 'animation' %}">Animation</a>
+                <a href="{% url 'movie_category' 'fantasy' %}">Fantasy</a>
+                <a href="{% url 'movie_category' 'family' %}">family</a>
+                <a href="{% url 'movie_category' 'music' %}">music</a>
+                <a href="{% url 'movie_category' 'war' %}">war</a>
+                <a href="{% url 'movie_category' 'mystery' %}">mystery</a>
               </div>
             </div>
           </div>
