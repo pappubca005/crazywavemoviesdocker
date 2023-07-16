@@ -8,6 +8,7 @@ import datetime
 import json
 from decimal import Decimal
 from django.core.serializers.json import DjangoJSONEncoder
+import re
 
 movie = Movie()
 
@@ -79,45 +80,58 @@ class DecimalEncoder(DjangoJSONEncoder):
 
 
 def movie_category(request, movie_category):
-    genres = {
-        "action": 28,
-        "adventure": 12,
-        "animation": 16,
-        "science fiction": 878,
-        "crime": 80,
-        "comedy": 35,
-        "romance": 10749,
-        "drama": 18,
-        "thriller": 53,
-        "documentary": 99,
-        "horror": 27,
-        "fantasy": 14,
-        "family": 10751,
-        "history": 36,
-        "music": 10402,
-        "war": 10752,
-        "western": 37,
-        "mystery": 9648,
-    }
-
     if movie_category.lower() == "bollywood":
+        url = "https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&page=1&primary_release_year=2023&region=in&sort_by=popularity.desc&with_original_language=hi"
+        response = requests.get(url, headers=headers)
+        movie_cat_list = response.json()["results"]
+    elif movie_category.lower() == "webseries":
+        url = "https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&page=1&primary_release_year=2023&region=in&sort_by=popularity.desc&with_original_language=hi"
+        response = requests.get(url, headers=headers)
+        movie_cat_list = response.json()["results"]
+    elif movie_category.lower() == "tv":
+        url = "https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&page=1&primary_release_year=2023&region=in&sort_by=popularity.desc&with_original_language=hi"
+        response = requests.get(url, headers=headers)
+        movie_cat_list = response.json()["results"]
+    elif movie_category.lower() == "premium":
         url = "https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=true&page=1&primary_release_year=2023&region=in&sort_by=popularity.desc&with_original_language=hi"
         response = requests.get(url, headers=headers)
         movie_cat_list = response.json()["results"]
 
     else:
+        genres = {
+            "action": 28,
+            "adventure": 12,
+            "animation": 16,
+            "science fiction": 878,
+            "crime": 80,
+            "comedy": 35,
+            "romance": 10749,
+            "drama": 18,
+            "thriller": 53,
+            "documentary": 99,
+            "horror": 27,
+            "fantasy": 14,
+            "family": 10751,
+            "history": 36,
+            "music": 10402,
+            "war": 10752,
+            "western": 37,
+            "mystery": 9648,
+            "kids": 16,
+        }
         gen = genres[movie_category.lower()]
 
-        url = (
-            "https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&with_genres="
-            + str(gen)
-            + "&sort_by=popularity.desc&include_video=true"
-        )
-        response = requests.get(url, headers=headers)
-        movie_cat_list = response.json()["results"]
-        # movie_cat_list1 = PopularMovies.objects.filter(genre_ids__contains=gen).values()
+        # url = (
+        #     "https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&with_genres="
+        #     + str(gen)
+        #     + "&sort_by=popularity.desc&include_video=true"
+        # )
+        # response = requests.get(url, headers=headers)
+        # movie_cat_list = response.json()["results"]
 
-        # movie_cat_list = list(movie_cat_list1)[:205]
+        movie_cat_list1 = PopularMovies.objects.filter(genre_ids__contains=gen).values()
+
+        movie_cat_list = list(movie_cat_list1)[:205]
         # movie_cat_list = json.dumps(data_list, cls=DecimalEncoder)
 
     context = {
@@ -173,6 +187,7 @@ def movie_update(request):
             moview_result = result.json()["results"]
             for item in moview_result:
                 id_exit = PopularMovies.objects.all().filter(id=item["id"]).count()
+                id_exit = 1
                 if id_exit == 0:
                     mv = PopularMovies.objects.create(
                         id=item["id"],
@@ -185,7 +200,7 @@ def movie_update(request):
                         popularity=item["popularity"],
                         poster_path=item["poster_path"],
                         release_date=datetime.datetime.now(),
-                        title=item["title"],
+                        title=re.sub("\W+", "", item["title"]),
                         video=item["video"],
                         vote_average=item["vote_average"],
                         vote_count=item["vote_count"],
@@ -206,7 +221,7 @@ def movie_update(request):
                         popularity=item["popularity"],
                         poster_path=item["poster_path"],
                         release_date=datetime.datetime.now(),
-                        title=item["title"],
+                        title=re.sub("\W+", "", item["title"]),
                         video=item["video"],
                         vote_average=item["vote_average"],
                         vote_count=item["vote_count"],
@@ -215,10 +230,7 @@ def movie_update(request):
 
         i += 1
 
-    return render(
-        request,
-        "movies/final/movie_detail.html",
-    )
+    return "Update usuucessful"
 
 
 def about(request):
