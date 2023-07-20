@@ -100,7 +100,11 @@
 
 <!-- Font  -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin="anonymous"
+/>
 <link
   href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
   rel="stylesheet"
@@ -113,7 +117,7 @@
   integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
   crossorigin="anonymous"
 />
-<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -133,8 +137,7 @@
   async
   src="https://www.googletagmanager.com/gtag/js?id=G-81EMJRDTTK"
 ></script>
-{% endcomment %}
-
+{% endcomment %} {% comment %}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
@@ -144,3 +147,4 @@
 
   gtag("config", "G-81EMJRDTTK");
 </script>
+{% endcomment %}

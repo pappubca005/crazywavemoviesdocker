@@ -36,6 +36,7 @@ class PopularMovies(models.Model):
     vote_average = models.DecimalField(max_digits=100, decimal_places=2)
     vote_count = models.IntegerField(null=True)
     movie_category = models.CharField(max_length=500, null=True, blank=True)
+    movie_trailer = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.title

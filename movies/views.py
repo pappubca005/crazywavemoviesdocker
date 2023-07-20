@@ -27,17 +27,43 @@ upcoming_url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US"
 
 # Create your views here.
 def MainHome(request):
-    response = requests.get(nowplaying_url + "&page=1", headers=headers)
-    nowplayingmovies = response.json()["results"]
+    # response = requests.get(nowplaying_url + "&page=1", headers=headers)
+    # nowplayingmovies = response.json()["results"]
+    nowplayingmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="nowplaying")
+        .values()
+        .order_by("-release_date")
+    )
 
-    response = requests.get(popular_url + "&page=1", headers=headers)
-    popularmovies = response.json()["results"]
+    nowplayingmovies = list(nowplayingmovies1)[0:39]
 
-    response = requests.get(toprated_url + "&page=1", headers=headers)
-    topmovies = response.json()["results"]
+    popularmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="popular")
+        .values()
+        .order_by("-release_date")
+    )
+    popularmovies = list(popularmovies1)[0:39]
 
-    response = requests.get(upcoming_url + "&page=1", headers=headers)
-    upcomingmovies = response.json()["results"]
+    # response = requests.get(toprated_url + "&page=1", headers=headers)
+    # popularmovies = response.json()["results"]
+
+    topmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="top")
+        .values()
+        .order_by("-release_date")
+    )
+    topmovies = list(topmovies1)[0:39]
+    # response = requests.get(toprated_url + "&page=1", headers=headers)
+    # topmovies = response.json()["results"]
+
+    upcomingmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="upcoming")
+        .values()
+        .order_by("-release_date")
+    )
+    upcomingmovies = list(upcomingmovies1)[0:39]
+    # response = requests.get(upcoming_url + "&page=1", headers=headers)
+    # upcomingmovies = response.json()["results"]
 
     context = {
         "nowplayingmovies": nowplayingmovies,
@@ -187,7 +213,7 @@ def movie_update(request):
             moview_result = result.json()["results"]
             for item in moview_result:
                 id_exit = PopularMovies.objects.all().filter(id=item["id"]).count()
-                id_exit = 1
+                # id_exit = 1
                 if id_exit == 0:
                     mv = PopularMovies.objects.create(
                         id=item["id"],
@@ -231,6 +257,21 @@ def movie_update(request):
         i += 1
 
     return "Update usuucessful"
+
+
+def updatelink(request):
+    # movies = PopularMovies.objects.all()
+    movies = PopularMovies.objects.filter(id__gte=623492)
+    for movie in movies:
+        result = requests.get(
+            "https://api.themoviedb.org/3/movie/" + str(movie.id) + " /videos",
+            headers=headers,
+        )
+        if result.status_code == 200 and len(result.json()["results"]) > 0:
+            PopularMovies.objects.filter(
+                id=movie.id,
+            ).update(movie_trailer=result.json()["results"][0]["key"])
+    return "movie link updated"
 
 
 def about(request):

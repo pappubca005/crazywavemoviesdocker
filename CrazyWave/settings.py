@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-0ynmdz3r5%z7yjn(_-04r-fvc4kp#vl*vd=$lpao!-m%ylzz_*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["oyemovies.shop", "localhost", "127.0.0.1"]
 SITE_ID = 1
 
 
@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "rest_framework",
     "movies",
+    "whitenoise.runserver_nostatic",
     # "runsslserver",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -125,21 +127,17 @@ USE_TZ = True
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-#     "/static/",
-# ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 STATIC_URL = "/static/"
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

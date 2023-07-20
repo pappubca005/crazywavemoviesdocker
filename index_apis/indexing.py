@@ -41,6 +41,7 @@ def indexURL(urls, http):
                     result["error"]["message"],
                 )
             )
+            break
         else:
             print(
                 "urlNotificationMetadata.url: {}".format(

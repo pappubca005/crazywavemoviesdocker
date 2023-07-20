@@ -20,6 +20,7 @@ urlpatterns = [
     ),
     # path("movie_detail/<movie_id>", views.movie_detail, name="movie_detail_2"),
     path("movie_update", views.movie_update, name="movie_update"),
+    path("update_link", views.updatelink, name="update_link"),
     path("about", views.about, name="about"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}),
     # path("search_details/", views.search_details, name="search_details"),
