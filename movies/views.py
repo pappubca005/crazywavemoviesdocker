@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from .models import Movies as MovieModel, PopularMovies
 from .models import SeriesModel
 from tmdbv3api import TMDb, Movie, TV, Trending
@@ -31,6 +32,7 @@ def MainHome(request):
     # nowplayingmovies = response.json()["results"]
     nowplayingmovies1 = (
         PopularMovies.objects.filter(movie_category__contains="nowplaying")
+        .filter(vote_average__gte=8)
         .values()
         .order_by("-release_date")
     )
@@ -195,10 +197,10 @@ def movie_update(request):
 
     # category = [popular, nowplaying, toprated, upcoming]
     category = {
-        "popular": ["upcoming_url", page_count[0]],
-        "nowplaying": ["upcoming_url", page_count[1]],
-        "toprated": ["upcoming_url", page_count[2]],
-        "upcoming": ["upcoming_url", page_count[3]],
+        "popular": [popular_url, page_count[0]],
+        "nowplaying": [nowplaying_url, page_count[1]],
+        "toprated": [toprated_url, page_count[2]],
+        "upcoming": [upcoming_url, page_count[3]],
     }
 
     i = 0
@@ -206,72 +208,92 @@ def movie_update(request):
 
     for cat in category:
         x = 0
-        for x in range(499):
-            result = requests.get(toprated_url + "&page=" + str(x + 1), headers=headers)
+        for x in range(page_count[0] if page_count[0] < 499 else 499):
+            result = requests.get(
+                category[cat][0] + "&page=" + str(x + 1), headers=headers
+            )
             if result.status_code != 200:
                 continue
             moview_result = result.json()["results"]
             for item in moview_result:
                 id_exit = PopularMovies.objects.all().filter(id=item["id"]).count()
                 # id_exit = 1
-                if id_exit == 0:
-                    mv = PopularMovies.objects.create(
-                        id=item["id"],
-                        adult=item["adult"],
-                        backdrop_path=item["backdrop_path"],
-                        genre_ids=item["genre_ids"],
-                        original_language=item["original_language"],
-                        original_title=item["original_title"],
-                        overview=item["overview"],
-                        popularity=item["popularity"],
-                        poster_path=item["poster_path"],
-                        release_date=datetime.datetime.now(),
-                        title=re.sub("\W+", "", item["title"]),
-                        video=item["video"],
-                        vote_average=item["vote_average"],
-                        vote_count=item["vote_count"],
-                        movie_category=category_name[i],
-                    )  # create a User object
-                    mv.save()  # save it
+                rel_date = datetime.datetime.now()
+                try:
+                    rel_date = item["release_date"]
 
-                else:
-                    PopularMovies.objects.filter(
-                        id=item["id"],
-                    ).update(
-                        adult=item["adult"],
-                        backdrop_path=item["backdrop_path"],
-                        genre_ids=item["genre_ids"],
-                        original_language=item["original_language"],
-                        original_title=item["original_title"],
-                        overview=item["overview"],
-                        popularity=item["popularity"],
-                        poster_path=item["poster_path"],
-                        release_date=datetime.datetime.now(),
-                        title=re.sub("\W+", "", item["title"]),
-                        video=item["video"],
-                        vote_average=item["vote_average"],
-                        vote_count=item["vote_count"],
-                        movie_category=category_name[i],
-                    )
+                    if id_exit == 0:
+                        mv = PopularMovies.objects.create(
+                            id=item["id"],
+                            adult=item["adult"],
+                            backdrop_path=item["backdrop_path"],
+                            genre_ids=item["genre_ids"],
+                            original_language=item["original_language"],
+                            original_title=item["original_title"],
+                            overview=item["overview"],
+                            popularity=item["popularity"],
+                            poster_path=item["poster_path"],
+                            release_date=rel_date,
+                            title=re.sub("\W+", "", item["title"]),
+                            video=item["video"],
+                            vote_average=item["vote_average"],
+                            vote_count=item["vote_count"],
+                            movie_category=category_name[i],
+                        )  # create a User object
+                        mv.save()  # save it
 
+                    else:
+                        PopularMovies.objects.filter(
+                            id=item["id"],
+                        ).update(
+                            adult=item["adult"],
+                            backdrop_path=item["backdrop_path"],
+                            genre_ids=item["genre_ids"],
+                            original_language=item["original_language"],
+                            original_title=item["original_title"],
+                            overview=item["overview"],
+                            popularity=item["popularity"],
+                            poster_path=item["poster_path"],
+                            release_date=rel_date,
+                            title=re.sub("\W+", "", item["title"]),
+                            video=item["video"],
+                            vote_average=item["vote_average"],
+                            vote_count=item["vote_count"],
+                            movie_category=category_name[i],
+                        )
+                except Exception as ex:
+                    print(ex)
+                    rel_date = datetime.datetime.now()
         i += 1
 
-    return "Update usuucessful"
+    return HttpResponse("<h1>Update usuucessful</h1>")
 
 
 def updatelink(request):
     # movies = PopularMovies.objects.all()
-    movies = PopularMovies.objects.filter(id__gte=623492)
+    # movies = PopularMovies.objects.filter(id__gte=623492)
+    # for movie in movies:
+    #     result = requests.get(
+    #         "https://api.themoviedb.org/3/movie/" + str(movie.id) + " /videos",
+    #         headers=headers,
+    #     )
+    #     if result.status_code == 200 and len(result.json()["results"]) > 0:
+    #         PopularMovies.objects.filter(
+    #             id=movie.id,
+    #         ).update(movie_trailer=result.json()["results"][0]["key"])
+
+    movies = PopularMovies.objects.all()
     for movie in movies:
         result = requests.get(
-            "https://api.themoviedb.org/3/movie/" + str(movie.id) + " /videos",
+            "https://api.themoviedb.org/3/movie/" + str(movie.id),
             headers=headers,
         )
-        if result.status_code == 200 and len(result.json()["results"]) > 0:
+        if result.status_code == 200 and len(result.json()) > 0:
             PopularMovies.objects.filter(
                 id=movie.id,
-            ).update(movie_trailer=result.json()["results"][0]["key"])
-    return "movie link updated"
+            ).update(release_date=result.json()["release_date"])
+
+    return HttpResponse("<h1>Update usuucessful</h1>")
 
 
 def about(request):

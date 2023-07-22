@@ -15,7 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+SESSION_COOKIE_SAMESITE = "Strict"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-0ynmdz3r5%z7yjn(_-04r-fvc4kp#vl*vd=$lpao!-m%ylzz_*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["oyemovies.shop", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["oyemovies.shop", "localhost", "127.0.0.1", "34.203.202.97"]
 SITE_ID = 1
 
 
