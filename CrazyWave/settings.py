@@ -25,7 +25,15 @@ SECRET_KEY = "django-insecure-0ynmdz3r5%z7yjn(_-04r-fvc4kp#vl*vd=$lpao!-m%ylzz_*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["oyemovies.shop", "localhost", "127.0.0.1", "34.203.202.97"]
+ALLOWED_HOSTS = [
+    "oyemovies.shop",
+    "localhost",
+    "127.0.0.1",
+    "34.203.202.97",
+    "35.160.120.126",
+    "44.233.151.27",
+    "34.211.200.85",
+]
 SITE_ID = 1
 
 
