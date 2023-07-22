@@ -3,6 +3,7 @@ from django.urls import path, include
 from . import views
 from .sitemaps import StaticViewSitemap, MovieViewSitemap
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 
 sitemaps = {"static": StaticViewSitemap, "movie_detail": MovieViewSitemap}
 
@@ -24,4 +25,10 @@ urlpatterns = [
     path("about", views.about, name="about"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}),
     # path("search_details/", views.search_details, name="search_details"),
+    path(
+        "robots.txt",
+        TemplateView.as_view(
+            template_name="movies/robots.txt", content_type="text/plain"
+        ),
+    ),
 ]
