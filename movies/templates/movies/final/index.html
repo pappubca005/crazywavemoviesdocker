@@ -1,82 +1,41 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>Oye Movies</title>
-{% include 'movies/final/header.html' %}
-</head>
-<!------------------------Scroll to top button------------------------------------------------>
+    {% include 'movies/final/header.html' %}
+  </head>
+  <!------------------------Scroll to top button------------------------------------------------>
 
-<script>
-  setTimeout(function () {
-    $('.section').fadeToggle();
-  }, 4000);
-  
-</script>
+  <script>
+    setTimeout(function () {
+      $(".section").fadeToggle();
+    }, 4000);
+  </script>
 
-<body>
-  
+  <body>
+    <div class="scroll-bar">
+      {% include 'movies/final/navbar.html' %}
 
-  <div class="scroll-bar">
+      <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
+      <label class="online">Download Latest Movies Now!</label>
 
-    
-    <!-- navbar starts -->
-    {% include 'movies/final/navbar.html' %}
-    
+      {% include 'movies/final/topcard.html' %}
 
-    <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
-    <label class="online">Download Latest Movies Now!</label>
-    
-
-    {% include 'movies/final/topcard.html' %}
-
-        
-    <div class="maincontainer">
-
-      <h2>Movies</h2>
-      <hr>
-      <div class="container">
+      <div class="maincontainer">
+        <h2>Movies</h2>
+        <hr />
+        <div class="container">
           <div id="movies" class="row"></div>
+        </div>
+
+        {% include 'movies/final/topmovies.html' %} {% include
+        'movies/final/popularmovies.html' %} {% include
+        'movies/final/upcoming.html' %}
+
+        <div id="waterdrop"></div>
+        <!-------------------------------Footer-------------------------------->
+        {% include 'movies/final/footer.html' %}
       </div>
-           
-      {% include 'movies/final/topmovies.html' %}
-
-      {% include 'movies/final/popularmovies.html' %}
-      {% include 'movies/final/upcoming.html' %}
-
-    <!---next block -->
-
-    {% comment %} <h2>Web Series</h2>
-    <hr>
-    
-    {% include 'movies/final/hollywoodwebseries.html' %}
-
-    <!---third block -->
-
-
-    {% include 'movies/final/bollywoodwebseries.html' %}
-
-
-  <!---third block -->
-
-      <h2>Kids</h2>
-      <hr>
-
-
-      {% include 'movies/final/kidsmovie.html' %}
-
-      <h2>Anime</h2>
-      <hr>
-      
-
-      {% include 'movies/final/animationmovie.html' %}
- {% endcomment %}
-
-    <div id="waterdrop"></div>
-
-    <!-------------------------------Footer-------------------------------->
-    {% include 'movies/final/footer.html' %}
-
-    </body>
-
+    </div>
+  </body>
 </html>
