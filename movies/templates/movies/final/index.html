@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     {% include 'movies/final/header.html' %}
   </head>
@@ -13,13 +13,12 @@
   </script>
 
   <body>
+    {% include 'movies/final/navbar.html' %}
+
+    <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
+    <label class="online">Download Latest Movies Now!</label>
     <div class="scroll-bar">
-      {% include 'movies/final/navbar.html' %}
-
-      <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
-      <label class="online">Download Latest Movies Now!</label>
-
-      {% comment %} {% include 'movies/final/topcard.html' %} {% endcomment %}
+      {% include 'movies/final/topcard.html' %}
 
       <div class="maincontainer">
         <h2>Movies</h2>
