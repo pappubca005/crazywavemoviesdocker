@@ -4,13 +4,13 @@
   <hr class="footer-hr">
   <div class="footer-content">
     <div class="footer-left">
-      <a href="home.html"><img class="footer-logo" src="{% static 'images/TheaterLogoFinal.png' %}" alt="" width="30"
-          height="24"></a>
-      <p class="footer-bottom-tagline">Watch! Chill! Repeat!</p>
+      <a href="//www.dmca.com/Protection/Status.aspx?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca-badge-w100-2x1-01.png?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"  alt="DMCA.com Protection Status" width="50" height="45"/></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+      {% comment %} <a href="//www.dmca.com/Protection/Status.aspx?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script> {% endcomment %}
+      
     </div>
     <div class="footer-middle">
       <h2 class="footer-heading">Follow Us</h2>
-      <ul class="footer-middle-list icons">
+      {% comment %} <ul class="footer-middle-list icons">
         <a class="footer-links" href="https://www.facebook.com/" target="_blank"><i
             class="fab fa-facebook-f facebook" style="color:red"></i></a>
         <a class="footer-links" href="https://twitter.com/login?lang=en" target="_blank"><i
@@ -21,36 +21,32 @@
             class="fab fa-instagram instagram" style="color:red"></i></a>
         <a class="footer-links" href="https://github.com/QAZIMAAZARSHAD/Movie-Streaming-Website" target="_blank"><i
             class="fab fa-github github" style="color:red"></i></a>
-      </ul>
+      </ul> {% endcomment %}
     </div>
     <div class="footer-middle">
       <h2 class="footer-heading">Services</h2>
       <ul class="footer-middle-list">
         <li class="footer-middle-list-item"><a href="home.html">Enjoy Latest Movies</a> </li>
-        <li class="footer-middle-list-item"><a href="web-series.html">Watch Web-Series</a> </li>
-        <li class="footer-middle-list-item"><a href="kids.html">Everything for Kids</a> </li>
-        <li class="footer-middle-list-item"><a href="news.html">Coming soon</a> </li>
-        <li class="footer-middle-list-item"><a href="premium.html">Get Premium Subscription</a> </li>
         <li class="footer-middle-list-item"><a href="faq.html">FAQ</a> </li>
       </ul>
     </div>
    <div class="footer-middle">
-            <h2 class="footer-heading">Try Our App</h2>
-            <ul class="footer-middle-list icons">
-                <a class="footer-links" href="#"><i class="fab fa-google-play" style="color:red"></i></a>
-                <a class="footer-links" href="#"><i class="fab fa-app-store-ios" style="color:red"></i></a>
-            </ul>
+    <a href="home.html"><img class="footer-logo" src="{% static 'images/TheaterLogoFinal.png' %}" alt="" width="30"
+      height="24"></a>
+  <p class="footer-bottom-tagline">Watch! Chill! Repeat!</p>
         </div>
     <div class="footer-right">
       <p class="footer-links">
       <h2 class="footer-heading">Contact Us</h2>
       <p class="footer-bottom-tagline">Feel free to contact us.</p>
       <a class="footer-contact-button" href="contactus.html">Contact</a>
+      
       </p>
     </div>
   </div>
   <hr class="footer-hr">
   <div class="footer-copyright">
+   
     <p>Copyright Oye Movies &copy; and &reg; Since 2023
       {% comment %} <script>
         document.write(new Date().getFullYear()) 
@@ -111,4 +107,3 @@
   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
   crossorigin="anonymous"></script>
 <script src="{% static 'js/script1.js' %}"></script>
-
