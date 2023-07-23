@@ -16,7 +16,7 @@
     {% include 'movies/final/navbar.html' %}
 
     <marquee>Welcome To <i>CrazyWave Movies</i>.com<sup>&reg;</sup></marquee>
-    <label class="online">Download Latest Movies Now!</label>
+    <h1 class="online">Download Latest Movies Now!</h1>
     <div class="scroll-bar">
       {% include 'movies/final/topcard.html' %}
 
@@ -26,10 +26,11 @@
         <div class="container">
           <div id="movies" class="row"></div>
         </div>
-
-        {% include 'movies/final/topmovies.html' %} {% include
-        'movies/final/popularmovies.html' %} {% include
-        'movies/final/upcoming.html' %}
+        {% include 'movies/final/popularmovies.html' %}
+        <h2>Movies</h2>
+        {% include 'movies/final/upcoming.html' %}
+        <h2>Movies</h2>
+        {% include 'movies/final/topmovies.html' %}
 
         <div id="waterdrop"></div>
         <!-------------------------------Footer-------------------------------->
