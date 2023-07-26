@@ -1,72 +1,69 @@
-
- {% load static %}
+{% load static %}
 <footer class="footer">
-  <hr class="footer-hr">
+  <hr class="footer-hr" />
   <div class="footer-content">
     <div class="footer-left">
-      <a href="//www.dmca.com/Protection/Status.aspx?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca-badge-w100-2x1-01.png?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"  alt="DMCA.com Protection Status" width="50" height="45"/></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
-      {% comment %} <a href="//www.dmca.com/Protection/Status.aspx?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script> {% endcomment %}
-      
-    </div>
-    <div class="footer-middle">
-      <h2 class="footer-heading">Follow Us</h2>
-      {% comment %} <ul class="footer-middle-list icons">
-        <a class="footer-links" href="https://www.facebook.com/" target="_blank"><i
-            class="fab fa-facebook-f facebook" style="color:red"></i></a>
-        <a class="footer-links" href="https://twitter.com/login?lang=en" target="_blank"><i
-            class="fab fa-twitter twitter" style="color:red"></i></a>
-        <a class="footer-links" href="https://www.linkedin.com/login" target="_blank"><i
-            class="fab fa-linkedin linkedin" style="color:red"></i></a>
-        <a class="footer-links" href="https://www.instagram.com/" target="_blank"><i
-            class="fab fa-instagram instagram" style="color:red"></i></a>
-        <a class="footer-links" href="https://github.com/QAZIMAAZARSHAD/Movie-Streaming-Website" target="_blank"><i
-            class="fab fa-github github" style="color:red"></i></a>
-      </ul> {% endcomment %}
+      <a
+        href="//www.dmca.com/Protection/Status.aspx?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"
+        title="DMCA.com Protection Status"
+        class="dmca-badge"
+      >
+        <img
+          src="https://images.dmca.com/Badges/dmca-badge-w100-2x1-01.png?ID=25e5148f-ee6d-4e15-a5ed-328b7fdab505"
+          alt="DMCA.com Protection Status"
+          width="50"
+          height="45"
+      /></a>
+      <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
     </div>
     <div class="footer-middle">
       <h2 class="footer-heading">Services</h2>
       <ul class="footer-middle-list">
-        <li class="footer-middle-list-item"><a href="home.html">Enjoy Latest Movies</a> </li>
-        <li class="footer-middle-list-item"><a href="faq.html">FAQ</a> </li>
+        <li class="footer-middle-list-item">
+          <a href="home.html">Enjoy Latest Movies</a>
+        </li>
+        <li class="footer-middle-list-item"><a href="faq.html">FAQ</a></li>
       </ul>
     </div>
-   <div class="footer-middle">
-    <a href="home.html"><img class="footer-logo" src="{% static 'images/TheaterLogoFinal.png' %}" alt="" width="30"
-      height="24"></a>
-  <p class="footer-bottom-tagline">Watch! Chill! Repeat!</p>
-        </div>
+    <div class="footer-middle">
+      <a href="home.html"
+        ><img
+          class="footer-logo"
+          src="{% static 'images/TheaterLogoFinal.png' %}"
+          alt=""
+          width="30"
+          height="24"
+      /></a>
+      <p class="footer-bottom-tagline">Watch! Chill! Repeat!</p>
+    </div>
     <div class="footer-right">
-      <p class="footer-links">
+      <p class="footer-links"></p>
       <h2 class="footer-heading">Contact Us</h2>
       <p class="footer-bottom-tagline">Feel free to contact us.</p>
       <a class="footer-contact-button" href="contactus.html">Contact</a>
-      
-      </p>
     </div>
   </div>
-  <hr class="footer-hr">
+  <hr class="footer-hr" />
   <div class="footer-copyright">
-   
-    <p>Copyright Oye Movies &copy; and &reg; Since 2023
-      {% comment %} <script>
-        document.write(new Date().getFullYear()) 
-      </script> Under ApnaTheatre.com : (Project Is Done By Qazi Maaz Arshad) {% endcomment %}
-    </p>
+    <p>Copyright Oye Movies &copy; and &reg; Since 2023</p>
   </div>
 </footer>
 
-
-<!----------------------scroll back to top button-->
 <button id="scrollToTopButton" title="Go to top">
   <i class="fa fa-angle-double-up" aria-hidden="true"></i>
 </button>
 <script>
   $(document).ready(function () {
     var scrollTopButton = document.getElementById("scrollToTopButton");
-    window.onscroll = function () { scrollFunction() };
+    window.onscroll = function () {
+      scrollFunction();
+    };
 
     function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
         scrollTopButton.style.display = "block";
       } else {
         scrollTopButton.style.display = "none";
@@ -74,12 +71,10 @@
     }
 
     $("#scrollToTopButton").click(function () {
-      $('html ,body').animate({ scrollTop: 0 }, 800)
+      $("html ,body").animate({ scrollTop: 0 }, 800);
     });
   });
 </script>
-
-<!-- footer scripts -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -87,23 +82,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/main-min.js' %}"></script>
-{% comment %} <script src="{% static 'js/style.css' %}"></script> {% endcomment %}
 
 <script>
-  {% comment %} jQuery('#waterdrop').raindrops({
-    color: '#292c2f',
-    canvasHeight: 150,
-    density: 0.1,
-    frequency: 20
-  }); {% endcomment %}
-</script>
-<script>
-  function logout(){
+  function logout() {
     window.location.replace("login.html");
   }
 </script>
-<!-- bootsstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"
+></script>
 <script src="{% static 'js/script1.js' %}"></script>

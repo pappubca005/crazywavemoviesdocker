@@ -28,26 +28,6 @@
             <div class="flim">
               <b>{{item.title}}</b><br />IMDb - {{item.vote_average}}
               <br />
-              {% comment %}
-              <button
-                class="btn btn-success"
-                type="submit"
-                value=""
-                onclick="openWin10{{item.id}}()"
-              >
-                ▶Trailer
-              </button>
-              <script type="text/javascript">
-                function openWin10{{item.id}}(){
-                  var link ='{{ item.movie_trailer }}';
-                  var baseurl = 'https://www.youtube.com/watch?v=';
-                  var url= baseurl.concat("",link);
-                  console.log(link)
-                  console.log("link address " + baseurl + link);
-                  window.open(baseurl + link,"_blank","top=100,left=250,height=400,width=600,channelmode=yes,fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,noopener=no");
-                }
-              </script>
-              {% endcomment %}
               <br />
             </div>
           </div>
