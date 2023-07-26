@@ -4,13 +4,12 @@
   <head>
     {% include 'movies/final/header.html' %}
     <title>Oye Movies</title>
+    <script>
+      setTimeout(function () {
+        $(".section").fadeToggle();
+      }, 4000);
+    </script>
   </head>
-
-  <script>
-    setTimeout(function () {
-      $(".section").fadeToggle();
-    }, 4000);
-  </script>
 
   <body>
     {% include 'movies/final/navbar.html' %}
