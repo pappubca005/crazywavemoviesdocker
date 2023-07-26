@@ -12,7 +12,6 @@
     <button
       id="nav"
       class="navbar-toggler"
-      id="nav"
       style="background-color: #8b0000"
       type="button"
       data-bs-toggle="collapse"
@@ -21,10 +20,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span
-        class="navbar-toggler-icon"
-        style="background-color: dark-grey"
-      ></span>
+      <span class="navbar-toggler-icon" style="background-color: grey"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -84,7 +80,6 @@
             >Premium</a
           >
         </li>
-
         <li class="nav-item">
           <a
             class="nav-link"
@@ -142,31 +137,29 @@
           </div>
           <!-- Genre dropdown ends-->
         </li>
-
-          <li>
-            <button
-              type="button"
-              class="btn btn-light"
-              onclick="logout()"
-              onMouseOver="this.style.color='red'"
-              onMouseOut="this.style.color='white'"
-            >
-              Logout
-            </button>
-          </li>
-        </div>
+        <li>
+          <button
+            type="button"
+            class="btn btn-light"
+            onclick="logout()"
+            onMouseOver="this.style.color='red'"
+            onMouseOut="this.style.color='white'"
+          >
+            Logout
+          </button>
+        </li>
       </ul>
-      <form id="searchForm" class="d-flex">
-        <input
-          class="form-control me-2"
-          type="text"
-          id="searchText"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-danger" type="submit">Search</button>
-      </form>
     </div>
+    <form id="searchForm" class="d-flex">
+      <input
+        class="form-control me-2"
+        type="text"
+        id="searchText"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-danger" type="submit">Search</button>
+    </form>
   </div>
 </nav>
 
