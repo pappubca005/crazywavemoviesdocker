@@ -1,34 +1,29 @@
 from oauth2client.service_account import ServiceAccountCredentials
 import httplib2
 import json
+import requests
 
 import pandas as pd
 
-# https://developers.google.com/search/apis/indexing-api/v3/prereqs#header_2
-JSON_KEY = "37036b1d542643cb8f4ef881953c24de"
-SCOPES = ["https://www.googleapis.com/auth/indexing"]
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name(
-    JSON_KEY_FILE, scopes=SCOPES
-)
-http = credentials.authorize(httplib2.Http())
-
-
-def indexURL(urls, http):
+def indexURL(urls):
     # print(type(url)); print("URL: {}".format(url));return;
-
-    ENDPOINT = "https://indexing.googleapis.com/v3/urlNotifications:publish"
 
     for u in urls:
         # print("U: {} type: {}".format(u, type(u)))
-
+        ENDPOINT = (
+            "https://www.bing.com/indexnow?url="
+            + u
+            + "&key=a44383dd9b424b37afdf935ede1e3d3b"
+        )
         content = {}
         content["url"] = u.strip()
         content["type"] = "URL_UPDATED"
         json_ctn = json.dumps(content)
         # print(json_ctn);return
-
-        response, content = http.request(ENDPOINT, method="POST", body=json_ctn)
+        response = requests.post(ENDPOINT)
+        print(response)
+        # response, content = http.request(ENDPOINT, method="POST", body=json_ctn)
 
         result = json.loads(content.decode())
 
@@ -70,4 +65,4 @@ data.csv has 2 columns: URL and date.
 I just need the URL column.
 """
 csv = pd.read_csv("my_data.csv")
-csv[["URL"]].apply(lambda x: indexURL(x, http))
+csv[["URL"]].apply(lambda x: indexURL(x))

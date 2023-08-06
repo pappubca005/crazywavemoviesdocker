@@ -31,4 +31,11 @@ urlpatterns = [
             template_name="movies/robots.txt", content_type="text/plain"
         ),
     ),
+    path(
+        "6e59aa9b995945ef8295d8e5c4528883.txt",
+        TemplateView.as_view(
+            template_name="movies/6e59aa9b995945ef8295d8e5c4528883.txt",
+            content_type="text/plain",
+        ),
+    ),
 ]
