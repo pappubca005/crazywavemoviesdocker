@@ -1,16 +1,21 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from .models import Movies as MovieModel, PopularMovies
+from django.http import HttpResponse,Http404
+from .models import Movies as MovieModel, PopularMovies,BlockedMovies
 from .models import SeriesModel
 from tmdbv3api import TMDb, Movie, TV, Trending
-from .serializers import MoviesSerializer, PopularMoviesSerializer
+from .serializers import MoviesSerializer, PopularMoviesSerializer,BlockedMoviesSerializer
 import requests
 import datetime
 import json
 from decimal import Decimal
 from django.core.serializers.json import DjangoJSONEncoder
 import re
+from rest_framework.decorators import api_view
+from django.http import HttpResponse
 
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
 movie = Movie()
 
 tmdb = TMDb()
@@ -25,6 +30,39 @@ popular_url = "https://api.themoviedb.org/3/movie/popular?language=en-US"
 toprated_url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US"
 upcoming_url = "https://api.themoviedb.org/3/movie/upcoming?language=en-US"
 
+
+def about(request):
+    # return "this is about page"
+    return HttpResponse("this is about page")
+
+
+
+
+@api_view(['GET', 'POST', 'DELETE'])
+def blocked_list(request):
+    if request.method == 'GET':
+        blockedmovies = BlockedMovies.objects.all()
+        
+        title = request.query_params.get('title', None)
+        if title is not None:
+            blockedmovies = blockedmovies.filter(title__icontains=title)
+        
+        blockedmovies_serializer = BlockedMoviesSerializer(blockedmovies, many=True)
+        return JsonResponse(blockedmovies_serializer.data, safe=False)
+        # 'safe=False' for objects serialization
+ 
+    elif request.method == 'POST':
+        blockedmovies_data = JSONParser().parse(request)
+        blockedmovies_serializer = BlockedMoviesSerializer(data=blockedmovies_data)
+        if blockedmovies_serializer.is_valid():
+            blockedmovies_serializer.save()
+            return JsonResponse(blockedmovies_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(blockedmovies_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        count = BlockedMovies.objects.all().delete()
+        return JsonResponse({'message': '{} blockedmovies were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+ 
 
 # Create your views here.
 def MainHome(request):
@@ -78,26 +116,34 @@ def MainHome(request):
 
 def movie_detail(request, movie_id, movie_name):
     print(movie_name)
-    # id = get_object_or_404(PopularMovies, id=movie_id)
-    url = "https://api.themoviedb.org/3/movie/" + movie_id + "?language=en-US"
 
-    response = requests.get(url, headers=headers)
+    bm=BlockedMovies.objects.all().filter(id=movie_id).count()
+    # bm = get_object_or_404(BlockedMovies, id=movie_id)
+    if bm >=1:
+        # return HttpResponse("movies doesn't exit")
+        raise Http404
+    else:
 
-    # print(response.text)
+        # id = get_object_or_404(PopularMovies, id=movie_id)
+        url = "https://api.themoviedb.org/3/movie/" + movie_id + "?language=en-US"
 
-    movie_detail = response.json()
-    movie_detail["release_year"] = movie_detail["release_date"][:4]
-    url = "https://api.themoviedb.org/3/movie/" + movie_id + "/images"
+        response = requests.get(url, headers=headers)
 
-    response = requests.get(url, headers=headers)
-    imagedetail = response.json()
+        # print(response.text)
 
-    context = {
-        "moviedetail": movie_detail,
-        "imagedetail": imagedetail["backdrops"][0:15],
-    }
+        movie_detail = response.json()
+        movie_detail["release_year"] = movie_detail["release_date"][:4]
+        url = "https://api.themoviedb.org/3/movie/" + movie_id + "/images"
 
-    return render(request, "movies/final/movie_detail.html", context)
+        response = requests.get(url, headers=headers)
+        imagedetail = response.json()
+
+        context = {
+            "moviedetail": movie_detail,
+            "imagedetail": imagedetail["backdrops"][0:15],
+        }
+
+        return render(request, "movies/final/movie_detail.html", context)
 
 
 class DecimalEncoder(DjangoJSONEncoder):
@@ -296,5 +342,36 @@ def updatelink(request):
     return HttpResponse("<h1>Update usuucessful</h1>")
 
 
-def about(request):
-    return "this is about page"
+
+ 
+@api_view(['GET', 'PUT', 'DELETE'])
+def blocked_detail(request, pk):
+    try: 
+        blockedmovies = BlockedMovies.objects.get(pk=pk) 
+    except BlockedMovies.DoesNotExist: 
+        return JsonResponse({'message': 'The blockedmovies does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
+    if request.method == 'GET': 
+        blockedmovies_serializer = BlockedMoviesSerializer(blockedmovies) 
+        return JsonResponse(blockedmovies_serializer.data) 
+ 
+    elif request.method == 'PUT': 
+        blockedmovies_data = JSONParser().parse(request) 
+        blockedmovies_serializer = BlockedMoviesSerializer(blockedmovies, data=blockedmovies_data) 
+        if blockedmovies_serializer.is_valid(): 
+            blockedmovies_serializer.save() 
+            return JsonResponse(blockedmovies_serializer.data) 
+        return JsonResponse(blockedmovies_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+    elif request.method == 'DELETE': 
+        blockedmovies.delete() 
+        return JsonResponse({'message': 'blocked movies was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    
+        
+@api_view(['GET'])
+def blocked_list_published(request):
+    blockedmovies = BlockedMovies.objects.filter(published=True)
+        
+    if request.method == 'GET': 
+        blockedmovies_serializer = BlockedMoviesSerializer(blockedmovies, many=True)
+        return JsonResponse(blockedmovies_serializer.data, safe=False)

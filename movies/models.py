@@ -19,6 +19,12 @@ class AdLinks(models.Model):
     def __str__(self):
         return self.link_name
 
+class BlockedMovies(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=True)
+    title = models.CharField(max_length=10000, null=True, blank=True)
+    def __str__(self):
+        return self.title
+    
 
 class PopularMovies(models.Model):
     id = models.IntegerField(primary_key=True)

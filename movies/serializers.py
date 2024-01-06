@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Movies, PopularMovies
+from .models import Movies, PopularMovies,BlockedMovies
 
 
 class MoviesSerializer(serializers.ModelSerializer):
@@ -64,3 +64,8 @@ class PopularMoviesSerializer(serializers.ModelSerializer):
         #     "vote_average",
         #     "vote_count",
         # ]
+class BlockedMoviesSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = BlockedMovies
+        fields = "__all__"

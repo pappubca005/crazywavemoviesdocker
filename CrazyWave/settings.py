@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "movies",
     "whitenoise.runserver_nostatic",
+    "api",
+    'corsheaders',
     # "runsslserver",
 ]
 
@@ -64,7 +66,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
 
 ROOT_URLCONF = "CrazyWave.urls"
 

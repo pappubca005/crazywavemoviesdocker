@@ -9,6 +9,11 @@ sitemaps = {"static": StaticViewSitemap, "movie_detail": MovieViewSitemap}
 
 
 urlpatterns = [
+
+    path('api/blocked', views.blocked_list, name="blockedlist" ),
+    path('api/blocked/(?P<pk>[0-9]+)', views.blocked_detail, name="blockeddetail"),
+    path('api/blocked/published', views.blocked_list_published, name="blockedpublished"),
+
     path("", views.MainHome, name="MainHome"),
     # path("detail", views.detail_view, name="detailview"),
     path(
@@ -22,7 +27,8 @@ urlpatterns = [
     # path("movie_detail/<movie_id>", views.movie_detail, name="movie_detail_2"),
     path("movie_update", views.movie_update, name="movie_update"),
     path("update_link", views.updatelink, name="update_link"),
-    path("about", views.about, name="about"),
+    path("about/", views.about, name="about"),
+    
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}),
     # path("search_details/", views.search_details, name="search_details"),
     path(
@@ -38,4 +44,5 @@ urlpatterns = [
             content_type="text/plain",
         ),
     ),
+
 ]

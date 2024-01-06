@@ -7,3 +7,7 @@ djangorestframework
 jsonfield
 whitenoise
 gunicorn
+djangorestframework
+markdown
+django-filter
+django-cors-headers
