@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [
     "35.160.120.126",
     "44.233.151.27",
     "34.211.200.85",
-    "https://crazywavemovies.onrender.com",
+    "crazywavemovies.onrender.com",
     "crazymovies.onrender.com",
 ]
 SITE_ID = 1
