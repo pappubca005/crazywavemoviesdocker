@@ -66,44 +66,44 @@ def blocked_list(request):
 
 # Create your views here.
 def MainHome(request):
-    response = requests.get(nowplaying_url + "&page=1", headers=headers)
-    nowplayingmovies = response.json()["results"]
-    # nowplayingmovies1 = (
-    #     PopularMovies.objects.filter(movie_category__contains="nowplaying")
-    #     .filter(vote_average__gte=8)
-    #     .values()
-    #     .order_by("-release_date")
-    # )
+    # response = requests.get(nowplaying_url + "&page=1", headers=headers)
+    # nowplayingmovies = response.json()["results"]
+    nowplayingmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="nowplaying")
+        .filter(vote_average__gte=8)
+        .values()
+        .order_by("-release_date")
+    )
 
-    # nowplayingmovies = list(nowplayingmovies1)[0:39]
+    nowplayingmovies = list(nowplayingmovies1)[0:39]
 
-    # popularmovies1 = (
-    #     PopularMovies.objects.filter(movie_category__contains="popular")
-    #     .values()
-    #     .order_by("-release_date")
-    # )
-    # popularmovies = list(popularmovies1)[0:39]
+    popularmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="popular")
+        .values()
+        .order_by("-release_date")
+    )
+    popularmovies = list(popularmovies1)[0:39]
 
-    response = requests.get(toprated_url + "&page=1", headers=headers)
-    popularmovies = response.json()["results"]
+    # response = requests.get(toprated_url + "&page=1", headers=headers)
+    # popularmovies = response.json()["results"]
 
-    # topmovies1 = (
-    #     PopularMovies.objects.filter(movie_category__contains="top")
-    #     .values()
-    #     .order_by("-release_date")
-    # )
-    # topmovies = list(topmovies1)[0:39]
-    response = requests.get(toprated_url + "&page=1", headers=headers)
-    topmovies = response.json()["results"]
+    topmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="top")
+        .values()
+        .order_by("-release_date")
+    )
+    topmovies = list(topmovies1)[0:39]
+    # response = requests.get(toprated_url + "&page=1", headers=headers)
+    # topmovies = response.json()["results"]
 
-    # upcomingmovies1 = (
-    #     PopularMovies.objects.filter(movie_category__contains="upcoming")
-    #     .values()
-    #     .order_by("-release_date")
-    # )
-    # upcomingmovies = list(upcomingmovies1)[0:39]
-    response = requests.get(upcoming_url + "&page=1", headers=headers)
-    upcomingmovies = response.json()["results"]
+    upcomingmovies1 = (
+        PopularMovies.objects.filter(movie_category__contains="upcoming")
+        .values()
+        .order_by("-release_date")
+    )
+    upcomingmovies = list(upcomingmovies1)[0:39]
+    # response = requests.get(upcoming_url + "&page=1", headers=headers)
+    # upcomingmovies = response.json()["results"]
 
     context = {
         "nowplayingmovies": nowplayingmovies,
@@ -280,7 +280,7 @@ def movie_update(request):
                             popularity=item["popularity"],
                             poster_path=item["poster_path"],
                             release_date=rel_date,
-                            title=re.sub("\W+", "", item["title"]),
+                            title=re.sub(r"\W+", "", item["title"]),
                             video=item["video"],
                             vote_average=item["vote_average"],
                             vote_count=item["vote_count"],
@@ -301,7 +301,7 @@ def movie_update(request):
                             popularity=item["popularity"],
                             poster_path=item["poster_path"],
                             release_date=rel_date,
-                            title=re.sub("\W+", "", item["title"]),
+                            title=re.sub(r"\W+", "", item["title"]),
                             video=item["video"],
                             vote_average=item["vote_average"],
                             vote_count=item["vote_count"],
