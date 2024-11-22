@@ -23,7 +23,7 @@ SESSION_COOKIE_SAMESITE = "Strict"
 SECRET_KEY = "django-insecure-0ynmdz3r5%z7yjn(_-04r-fvc4kp#vl*vd=$lpao!-m%ylzz_*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "oyemovies.shop",
