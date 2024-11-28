@@ -11,7 +11,9 @@ sitemaps = {"static": StaticViewSitemap, "movie_detail": MovieViewSitemap}
 urlpatterns = [
 
     path('api/blocked', views.blocked_list, name="blockedlist" ),
-    path('api/blocked/(?P<pk>[0-9]+)', views.blocked_detail, name="blockeddetail"),
+    # path('api/blocked/(?P<pk>[0-9]+)', views.blocked_detail, name="blockeddetail"),
+    path('api/blocked/<int:pk>/', views.blocked_detail, name='blockeddetail'),
+
     path('api/blocked/published', views.blocked_list_published, name="blockedpublished"),
 
     path("", views.MainHome, name="MainHome"),
