@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     "crazywavemovies.onrender.com",
     "crazymovies.onrender.com",
     "stupidmovies.shop"
+    'crazywavemoviesdocker.onrender.com'
 ]
 SITE_ID = 1
 
